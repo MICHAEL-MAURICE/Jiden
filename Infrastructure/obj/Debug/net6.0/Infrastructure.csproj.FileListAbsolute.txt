@@ -1,0 +1,17 @@
+D:\FreeLance\jaiden\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
+D:\FreeLance\jaiden\Infrastructure\bin\Debug\net6.0\Infrastructure.runtimeconfig.json
+D:\FreeLance\jaiden\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
+D:\FreeLance\jaiden\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
+D:\FreeLance\jaiden\Infrastructure\bin\Debug\net6.0\Core.dll
+D:\FreeLance\jaiden\Infrastructure\bin\Debug\net6.0\Core.pdb
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CopyComplete
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\Infrastructure.genruntimeconfig.cache
+D:\FreeLance\jaiden\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll

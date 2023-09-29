@@ -1,0 +1,12 @@
+D:\FreeLance\jaiden\Core\bin\Debug\net6.0\Core.deps.json
+D:\FreeLance\jaiden\Core\bin\Debug\net6.0\Core.dll
+D:\FreeLance\jaiden\Core\bin\Debug\net6.0\Core.pdb
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\Core.csproj.AssemblyReference.cache
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\Core.AssemblyInfoInputs.cache
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\Core.AssemblyInfo.cs
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\Core.csproj.CoreCompileInputs.cache
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\Core.dll
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\refint\Core.dll
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\Core.pdb
+D:\FreeLance\jaiden\Core\obj\Debug\net6.0\ref\Core.dll
