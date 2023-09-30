@@ -8,6 +8,7 @@ namespace Core.Dto.Request
 {
     public class PricingSettingsRequest
     {
+        public Guid ? Id { get; set; }
         public decimal AdPricePerDay { get; set; }
         public int Type { get; set; }
         public decimal ProudectPrice { get; set; }

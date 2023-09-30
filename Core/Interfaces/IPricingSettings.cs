@@ -1,4 +1,5 @@
 ﻿using Core.Dto.Request;
+using Core.Dto.Response;
 using Core.Entities;
 using Core.Helper;
 using System;
@@ -13,8 +14,10 @@ namespace Core.Interfaces
     {
         public Task<ApiResponse> Create(PricingSettingsRequest request);
 
-        public Task<ApiResponse<decimal>> GetPriceOfProudect();
+        public Task<ApiResponse<List<PricingSettingResponse>>> GetAll();
 
-        public Task<ApiResponse<decimal>> GetPriceOfAd();
+        public Task<ApiResponse> Update(PricingSettingsRequest request);
+        public Task<ApiResponse<PricingSettingResponse>> GetById(Guid Id);
+
     }
 }
