@@ -151,6 +151,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("AppUseriD")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("NewsId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -165,9 +168,47 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ADID");
 
+                    b.HasIndex("NewsId")
+                        .IsUnique()
+                        .HasFilter("[NewsId] IS NOT NULL");
+
                     b.HasIndex("Proudectid");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("Core.Entities.News", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("ActiveNews")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Pragraph")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("Core.Entities.Order", b =>
@@ -715,6 +756,10 @@ namespace Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("ADID");
 
+                    b.HasOne("Core.Entities.News", "News")
+                        .WithOne("Image")
+                        .HasForeignKey("Core.Entities.Image", "NewsId");
+
                     b.HasOne("Core.Entities.Proudect", "Proudect")
                         .WithMany("Images")
                         .HasForeignKey("Proudectid")
@@ -722,7 +767,20 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Ad");
 
+                    b.Navigation("News");
+
                     b.Navigation("Proudect");
+                });
+
+            modelBuilder.Entity("Core.Entities.News", b =>
+                {
+                    b.HasOne("Core.Identity.AppUser", "AppUser")
+                        .WithMany("News")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Core.Entities.Order", b =>
@@ -895,6 +953,12 @@ namespace Infrastructure.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("Core.Entities.News", b =>
+                {
+                    b.Navigation("Image")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Core.Entities.Order", b =>
                 {
                     b.Navigation("ProudectOrders");
@@ -927,6 +991,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("Ads");
 
                     b.Navigation("GeographicalDistributionRanges");
+
+                    b.Navigation("News");
 
                     b.Navigation("Orders");
 

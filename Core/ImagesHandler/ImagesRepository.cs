@@ -27,7 +27,9 @@ namespace Core.ImagesHandler
             Profile = 1 , 
             Proudect  = 2 ,
             Ad = 3,
-            ProudectLicence=4
+            ProudectLicence=4,
+            news=5
+
 
         }
         public ReturnImagesData? AddImage(string Base64Image , int PerfectHeight , int PerfectWidth)

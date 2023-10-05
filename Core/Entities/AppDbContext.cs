@@ -47,6 +47,7 @@ namespace Core.Entities
         public DbSet<PharmaceuticalForm> PharmaceuticalForms { get; set; }
         public DbSet<Discrimination> Discriminations { get; set; }
         public DbSet<Image>Images { get; set; }
+        public DbSet<News> News { get; set; }
         public DbSet<PricingSettings> PricingSettings { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProudectOrder> ProudectOrders { get; set; }

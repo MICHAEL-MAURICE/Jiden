@@ -7,21 +7,21 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAqPkDOjaaZ0yg2ehx5HpZJAAAAAACAAAAAAAQZgAAAAEAACAAAADBz+zSWucFbXjSHzh4NQMvjley+ob/E7PqAIUG9Spg/QAAAAAOgAAAAAIAACAAAABaKL9NejDj0uDz2X/ej5U84nGaWBfvzWfwmTvRNoCrgyAAAAB05RkfLZRD66OofTOMMQaGrq8Y/08LmpB4N6oF/4J2+UAAAACIJAMESOtBbWOTAlPdxwWDFpLCJFki8rVsSRHySnkoNDeEun0de96j8ESk8ZCcM9HMR1paY+bI6LADw26K6y7m</EncryptedPassword>
     <_PublishTargetUrl>ftp://jaiden.somee.com/www.jaiden.somee.com</_PublishTargetUrl>
-    <History>True|2023-09-24T21:07:32.1323091Z;True|2023-09-24T21:30:44.3078726+03:00;False|2023-09-24T21:23:16.5988393+03:00;True|2023-09-18T23:29:40.6023968+03:00;False|2023-09-18T23:22:14.1041459+03:00;True|2023-09-18T21:45:37.3403903+03:00;False|2023-09-18T21:39:07.7005519+03:00;False|2023-07-03T20:39:49.0954521+03:00;True|2023-07-03T20:30:59.8072809+03:00;</History>
+    <History>True|2023-09-30T19:38:26.9704307Z;True|2023-09-30T22:34:38.4561966+03:00;True|2023-09-25T00:07:32.1323091+03:00;True|2023-09-24T21:30:44.3078726+03:00;False|2023-09-24T21:23:16.5988393+03:00;True|2023-09-18T23:29:40.6023968+03:00;False|2023-09-18T23:22:14.1041459+03:00;True|2023-09-18T21:45:37.3403903+03:00;False|2023-09-18T21:39:07.7005519+03:00;False|2023-07-03T20:39:49.0954521+03:00;True|2023-07-03T20:30:59.8072809+03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="Api.deps.json">
-      <publishTime>09/25/2023 00:00:36</publishTime>
+      <publishTime>09/30/2023 22:34:20</publishTime>
     </File>
     <File Include="Api.dll">
-      <publishTime>09/25/2023 00:00:36</publishTime>
+      <publishTime>09/30/2023 22:34:18</publishTime>
     </File>
     <File Include="Api.exe">
-      <publishTime>09/25/2023 00:00:36</publishTime>
+      <publishTime>09/30/2023 22:34:18</publishTime>
     </File>
     <File Include="Api.pdb">
-      <publishTime>09/25/2023 00:00:36</publishTime>
+      <publishTime>09/30/2023 22:34:18</publishTime>
     </File>
     <File Include="Api.runtimeconfig.json">
       <publishTime>08/06/2023 22:39:02</publishTime>
@@ -39,19 +39,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/09/2023 07:58:02</publishTime>
     </File>
     <File Include="Core.dll">
-      <publishTime>09/18/2023 23:21:46</publishTime>
+      <publishTime>09/30/2023 22:34:02</publishTime>
     </File>
     <File Include="Core.pdb">
-      <publishTime>09/18/2023 23:21:46</publishTime>
+      <publishTime>09/30/2023 22:34:02</publishTime>
     </File>
     <File Include="ImagesConfig.json">
       <publishTime>09/08/2023 19:15:18</publishTime>
     </File>
     <File Include="Infrastructure.dll">
-      <publishTime>09/25/2023 00:00:26</publishTime>
+      <publishTime>09/30/2023 22:34:06</publishTime>
     </File>
     <File Include="Infrastructure.pdb">
-      <publishTime>09/25/2023 00:00:26</publishTime>
+      <publishTime>09/30/2023 22:34:06</publishTime>
     </File>
     <File Include="Microsoft.AspNetCore.Authentication.JwtBearer.dll">
       <publishTime>06/19/2023 08:56:54</publishTime>
@@ -189,7 +189,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/15/2019 10:54:30</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>09/25/2023 00:00:36</publishTime>
+      <publishTime>09/30/2023 22:34:20</publishTime>
     </File>
   </ItemGroup>
 </Project>

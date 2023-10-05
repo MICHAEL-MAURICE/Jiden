@@ -15,12 +15,14 @@ namespace Api.Controllers
         private readonly IProudect _Proudect;
         private readonly JwtTokenData _jwtTokenData;
         private readonly IUser _Users;
+        private readonly INews _News;
 
-        public AdminController(IProudect proudect,ITokenDecoder tokenDecoder,IUser Users)
+        public AdminController(IProudect proudect,ITokenDecoder tokenDecoder,IUser Users,INews news)
         {
             _Proudect = proudect;   
             _jwtTokenData=tokenDecoder.GetTokenData();
             _Users = Users; 
+            _News = news;
                 
         }
 
@@ -55,6 +57,19 @@ namespace Api.Controllers
             return Ok(await _Proudect.UnActiveProudectByID(ProudectId));
         }
 
+
+        [HttpPatch("UnActivePost")]
+        public async Task<ActionResult<ApiResponse>> UnActivePost(Guid Id)
+        {
+
+            return Ok(await _News.UnActive(Id));
+        }
+        [HttpPatch("ActivePost")]
+        public async Task<ActionResult<ApiResponse>> ActivePost(Guid Id)
+        {
+
+            return Ok(await _News.Active(Id));
+        }
 
     }
 }

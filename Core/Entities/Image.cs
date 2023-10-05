@@ -20,6 +20,11 @@ namespace Core.Entities
         public Guid? Proudectid { get; set; } 
         [ForeignKey("Ad")]
         public Guid? ADID { get; set; }
+        [ForeignKey("News")]
+        public Guid ? NewsId { get; set; }
+
+        [JsonIgnore]
+        public News? News { get; set; }
         public AppUser ?AppUser { get; set; }
         [JsonIgnore]
         public Proudect? Proudect { get; set; }

@@ -80,6 +80,8 @@ builder.Services.AddScoped<ITokenDecoder, TokenDecoder>();
 builder.Services.AddScoped(typeof(IGeneric<>), typeof(Generic<>));
 builder.Services.AddScoped<IUser, User>();
 builder.Services.AddScoped<IPricingSettings,PricingSettingsRepo>();
+builder.Services.AddScoped<INews, NewsRepo>();
+builder.Services.AddScoped<IAd,AdRepo>();
 
 
 //______________Identity____________________________________

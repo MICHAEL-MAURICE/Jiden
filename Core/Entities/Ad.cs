@@ -32,7 +32,7 @@ namespace Core.Entities
 
         [ForeignKey("PricingSettings")]
         public Guid PricingSettingsId { get; set; }
-        public PricingSettings PricingSettings { get; set; }
+        public PricingSettings  PricingSettings { get; set; }
 
 
 
