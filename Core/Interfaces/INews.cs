@@ -14,8 +14,8 @@ namespace Core.Interfaces
         public Task<ApiResponse> Create(CreateNewsRequest request);
 
         public Task<ApiResponse<List<AllNewsResponse>>> GetAllActive(int PageNumber, int Count);
-        public Task<ApiResponse<List<AllNewsResponse>>> GetAllUnActive(int PageNumber = 1, int Count = 10);
-            public Task<ApiResponse<NewsDetailsResponse>> GetById(Guid Id);
+        public Task<ApiResponse<List<AllNewsResponse>>> GetAllUnActive(int PageNumber, int Count );
+        public Task<ApiResponse<NewsDetailsResponse>> GetById(Guid Id);
 
         public Task<ApiResponse> Delete(Guid Id);
 

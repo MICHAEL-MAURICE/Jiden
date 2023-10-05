@@ -102,7 +102,7 @@ namespace Infrastructure.Repo
            
         }
 
-        public async Task<ApiResponse<List<AllNewsResponse>>> GetAll(int PageNumber=1, int Count=10)
+        public async Task<ApiResponse<List<AllNewsResponse>>> GetAllActive(int PageNumber=1, int Count=10)
         {
             if (PageNumber > 0 && Count > 0)
             {
@@ -111,6 +111,38 @@ namespace Infrastructure.Repo
 
                 var AllNews = _Context.News.Include(News => News.Image)
                 .OrderBy(ne => ne.CreatedOn).Where(ne=>ne.ActiveNews==true).Skip(AlreadyseenCount).
+                    Take(Count)
+                .Select(ne => new AllNewsResponse()
+                {
+                    Id = ne.Id,
+                    Image = ImagesUtilities.GetImage(ne.Image.Path),
+                    Date = ne.CreatedOn,
+                    Title = ne.Title,
+                }).ToList();
+
+
+                if (AllNews.Any())
+                {
+
+                    return new ApiResponse<List<AllNewsResponse>>() { Data = AllNews, isSuccess = true, Message = "This all News", Status = 200 };
+
+                }
+
+            }
+            return new ApiResponse<List<AllNewsResponse>>() { Data = new List<AllNewsResponse>(), Status = 500, isSuccess = false, Message = "We Don't Have Any News" };
+
+        }
+
+
+        public async Task<ApiResponse<List<AllNewsResponse>>> GetAllUnActive(int PageNumber = 1, int Count = 10)
+        {
+            if (PageNumber > 0 && Count > 0)
+            {
+                int AlreadyseenCount = (PageNumber - 1) * Count;
+
+
+                var AllNews = _Context.News.Include(News => News.Image)
+                .OrderBy(ne => ne.CreatedOn).Where(ne => ne.ActiveNews == false).Skip(AlreadyseenCount).
                     Take(Count)
                 .Select(ne => new AllNewsResponse()
                 {
