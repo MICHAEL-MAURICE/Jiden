@@ -15,14 +15,15 @@ namespace Core.Entities
         public Guid ?AdImage { get; set; }
         public Guid ProudectId { get; set; }
         public string AppUserId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime ? StartDate { get; set; }
+        public DateTime ? EndDate { get; set; }
+        public int NumberOfDays { get; set; }
 
         public string  Description { get; set; }
 
         public Decimal Price { get {
 
-                return PricingSettings.AdPricePerDay * (EndDate - StartDate).Days;
+                return PricingSettings.AdPricePerDay * NumberOfDays;
             } }
         public bool Active { get; set; }
 

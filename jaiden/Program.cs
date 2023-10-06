@@ -41,6 +41,21 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
+//________________________Cores_____________________________
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
+
+//_____________________________________________________________
+
 
 //_____________________Database____________________________
 
@@ -72,16 +87,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 //_____________________DP__________________________
 
 builder.Services.AddScoped<IProudect, ProudectRepo>();
+builder.Services.AddScoped<IAd,AdRepo>();
 builder.Services.AddScoped<IRepositoryImages, ImagesRepository>();
 builder.Services.AddScoped<IupdateToken,updateToken>();
 builder.Services.AddScoped<IAuth, Auth>();
+
+//builder.Services.AddScoped<IAd, AdRepo>();
 builder.Services.AddScoped<ITokenFactory, TokenFactory>();
 builder.Services.AddScoped<ITokenDecoder, TokenDecoder>();
 builder.Services.AddScoped(typeof(IGeneric<>), typeof(Generic<>));
 builder.Services.AddScoped<IUser, User>();
 builder.Services.AddScoped<IPricingSettings,PricingSettingsRepo>();
 builder.Services.AddScoped<INews, NewsRepo>();
-builder.Services.AddScoped<IAd,AdRepo>();
+
 
 
 //______________Identity____________________________________
@@ -118,5 +136,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors();
 
 app.Run();
