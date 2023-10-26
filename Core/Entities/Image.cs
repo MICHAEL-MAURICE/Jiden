@@ -23,7 +23,7 @@ namespace Core.Entities
         [ForeignKey("News")]
         public Guid ? NewsId { get; set; }
 
-        [JsonIgnore]
+        
         public News? News { get; set; }
         public AppUser ?AppUser { get; set; }
         [JsonIgnore]

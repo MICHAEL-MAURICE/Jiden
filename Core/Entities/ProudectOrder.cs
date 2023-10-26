@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Core.Identity;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,7 +19,15 @@ namespace Core.Entities
         public Guid OrderId { get; set; }
         public Order Order { get; set; }
         public int ProudectNumber { get; set; }
+
+        [ForeignKey("AppUser")]
+        public string sellerUser { get; set; }
+
+        public AppUser AppUser { get; set; }
+
         public decimal PricePerUnit { get; set; }
+
+        public decimal JaidenMoney { get; set; }
         public decimal Price { get  { return ProudectNumber * PricePerUnit;  } }
 
     }

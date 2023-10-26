@@ -148,7 +148,7 @@ namespace Infrastructure.Repo
         {
 
             var user = _Context.Users
-    .Include(user => user.Proudects).Include(user=>user.PaymentMethods)
+    .Include(user => user.Proudects)
     .Include(user => user.GeographicalDistributionRanges)
     .Include(user => user.Ads)
     .Where(user => user.Id == ID)

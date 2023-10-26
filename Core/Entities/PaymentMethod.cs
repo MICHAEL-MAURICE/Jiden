@@ -14,8 +14,7 @@ namespace Core.Entities
         public string PaymentName { get; set; }
         public string Discription { get; set; }
         public string PaymentValue { get; set; }
-        public string AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+      
         ICollection<Order> Orders { get; set; } 
     }
 }

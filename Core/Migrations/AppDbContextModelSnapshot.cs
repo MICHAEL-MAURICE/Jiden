@@ -171,9 +171,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ADID");
 
-                    b.HasIndex("NewsId")
-                        .IsUnique()
-                        .HasFilter("[NewsId] IS NOT NULL");
+                    b.HasIndex("NewsId");
 
                     b.HasIndex("Proudectid");
 
@@ -211,6 +209,8 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
+                    b.HasIndex("ImageId");
+
                     b.ToTable("News");
                 });
 
@@ -219,6 +219,12 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("FullJaidenMoney")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("NumberOfProudects")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("PaymentId")
                         .HasColumnType("uniqueidentifier");
@@ -248,10 +254,6 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Discription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -265,8 +267,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("PaymentMethods");
                 });
@@ -421,6 +421,9 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<decimal>("JaidenMoney")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
@@ -433,11 +436,17 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ProudectNumber")
                         .HasColumnType("int");
 
+                    b.Property<string>("sellerUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProudectId");
+
+                    b.HasIndex("sellerUser");
 
                     b.ToTable("ProudectOrders");
                 });
@@ -506,6 +515,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<decimal?>("MoneyForJaiden")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("NameInArabic")
                         .IsRequired()
@@ -760,8 +772,8 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("ADID");
 
                     b.HasOne("Core.Entities.News", "News")
-                        .WithOne("Image")
-                        .HasForeignKey("Core.Entities.Image", "NewsId");
+                        .WithMany()
+                        .HasForeignKey("NewsId");
 
                     b.HasOne("Core.Entities.Proudect", "Proudect")
                         .WithMany("Images")
@@ -783,7 +795,15 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("AppUser");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Core.Entities.Order", b =>
@@ -803,17 +823,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("PaymentMethod");
-                });
-
-            modelBuilder.Entity("Core.Entities.PaymentMethod", b =>
-                {
-                    b.HasOne("Core.Identity.AppUser", "AppUser")
-                        .WithMany("PaymentMethods")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Core.Entities.Proudect", b =>
@@ -878,6 +887,14 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("ProudectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Core.Identity.AppUser", "AppUser")
+                        .WithMany("ProudectOrders")
+                        .HasForeignKey("sellerUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Order");
 
@@ -956,12 +973,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Core.Entities.News", b =>
-                {
-                    b.Navigation("Image")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Core.Entities.Order", b =>
                 {
                     b.Navigation("ProudectOrders");
@@ -999,7 +1010,7 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Orders");
 
-                    b.Navigation("PaymentMethods");
+                    b.Navigation("ProudectOrders");
 
                     b.Navigation("Proudects");
                 });

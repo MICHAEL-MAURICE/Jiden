@@ -51,9 +51,9 @@ namespace Infrastructure.Repo
                     var NewsImage =  _repositoryImages.AddImage(request.Image, (int)ImageTypes.news);
                     var ImageDbNews= new Image() { Id = NewsImage.ImageId, Path = NewsImage.Fullpath, Type = (int)ImageTypes.news };
            
-                    _Context.Images?.AddAsync(ImageDbNews);
+                    _Context.Images.Add(ImageDbNews);
 
-                    await _Context.SaveChangesAsync();
+                     _Context.SaveChanges();
 
                     var news = new News() { 
                     
@@ -67,14 +67,16 @@ namespace Infrastructure.Repo
                     
                     
                     };
-                    _Context.News?.AddAsync(news);
+                    _Context.News.Add(news);
 
-                   await _Context.SaveChangesAsync();
+                    _Context.SaveChanges();
+                    transaction.Commit();
                     return new ApiResponse(){Message="Created Sucssesfully",Status=200,isSuccess=true };
 
                 }
 
                 catch (Exception ex) {
+                    transaction.Rollback();
 
                     return new ApiResponse() { Message = "Not Created Sucssesfully", Status = 500, isSuccess = false };
 
@@ -110,8 +112,9 @@ namespace Infrastructure.Repo
 
 
                 var AllNews = _Context.News.Include(News => News.Image)
-                .OrderBy(ne => ne.CreatedOn).Where(ne=>ne.ActiveNews==true).Skip(AlreadyseenCount).
+                .OrderBy(ne => ne.CreatedOn).Where(ne => ne.ActiveNews == true).Skip(AlreadyseenCount).
                     Take(Count)
+              
                 .Select(ne => new AllNewsResponse()
                 {
                     Id = ne.Id,
@@ -119,7 +122,7 @@ namespace Infrastructure.Repo
                     Date = ne.CreatedOn,
                     Title = ne.Title,
                 }).ToList();
-
+               
 
                 if (AllNews.Any())
                 {
@@ -141,9 +144,10 @@ namespace Infrastructure.Repo
                 int AlreadyseenCount = (PageNumber - 1) * Count;
 
 
-                var AllNews = _Context.News.Include(News => News.Image)
+                var AllNews = _Context.News.Include(N => N.Image)
                 .OrderBy(ne => ne.CreatedOn).Where(ne => ne.ActiveNews == false).Skip(AlreadyseenCount).
                     Take(Count)
+              
                 .Select(ne => new AllNewsResponse()
                 {
                     Id = ne.Id,

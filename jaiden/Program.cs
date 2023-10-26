@@ -91,8 +91,9 @@ builder.Services.AddScoped<IAd,AdRepo>();
 builder.Services.AddScoped<IRepositoryImages, ImagesRepository>();
 builder.Services.AddScoped<IupdateToken,updateToken>();
 builder.Services.AddScoped<IAuth, Auth>();
+builder.Services.AddScoped<IOrder, OrderRepo>();
 
-//builder.Services.AddScoped<IAd, AdRepo>();
+builder.Services.AddScoped<IPayment, Payment>();
 builder.Services.AddScoped<ITokenFactory, TokenFactory>();
 builder.Services.AddScoped<ITokenDecoder, TokenDecoder>();
 builder.Services.AddScoped(typeof(IGeneric<>), typeof(Generic<>));

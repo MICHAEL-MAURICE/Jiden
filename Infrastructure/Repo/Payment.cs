@@ -33,11 +33,11 @@ namespace Infrastructure.Repo
                     PaymentName = payment.PaymentName,
                     PaymentValue = payment.PaymentValue,
                     Discription = payment.Discription,
-                    AppUserId = _jwtTokenData.UserId
+                    
                 };
 
-                _context.PaymentMethods.AddAsync(Payment);
-                _context.SaveChangesAsync();
+                await _context.PaymentMethods.AddAsync(Payment);
+                await _context.SaveChangesAsync();
                 return new ApiResponse(){ isSuccess= true ,Message="Payment Created Sucssesfully", Status=200};
             } catch(Exception ex) {
 
@@ -63,9 +63,9 @@ namespace Infrastructure.Repo
 
         public  async Task<ApiResponse<List<PaymentResponse>>> GetAll()
         {
-            var PaymentList= _context.PaymentMethods.Include(pay=>pay.AppUser).Select(Paym=>
+            var PaymentList= _context.PaymentMethods.Select(Paym=>
             new PaymentResponse() { 
-                Id=Paym.Id, AppUserId=_jwtTokenData.UserId,PaymentName=Paym.PaymentName,AppUserName=Paym.AppUser.UserName,
+                Id=Paym.Id, PaymentName=Paym.PaymentName,
                 Discription=Paym.Discription,PaymentValue=Paym.PaymentValue       
             }).ToList();
             if(PaymentList.Any())
@@ -76,25 +76,25 @@ namespace Infrastructure.Repo
         }
 
 
-        public async Task<ApiResponse<List<PaymentResponse>>> GetByUserId()
-        {
+        //public async Task<ApiResponse<List<PaymentResponse>>> GetByUserId()
+        //{
 
-            var PaymentList = _context.PaymentMethods.Include(pay => pay.AppUser).Where(pay=>pay.AppUserId==_jwtTokenData.UserId).Select(Paym =>
-             new PaymentResponse()
-             {
-                 Id = Paym.Id,
-                 AppUserId = _jwtTokenData.UserId,
-                 PaymentName = Paym.PaymentName,
-                 AppUserName = Paym.AppUser.UserName,
-                 Discription = Paym.Discription,
-                 PaymentValue = Paym.PaymentValue
-             }).ToList();
-            if (PaymentList.Any())
-                return new ApiResponse<List<PaymentResponse>>() { Data = PaymentList, Message = "This all Payments", Status = 200, isSuccess = true };
+        //    //var PaymentList = _context.PaymentMethods.Where(pay=>pay.AppUserId==_jwtTokenData.UserId).Select(Paym =>
+        //    // new PaymentResponse()
+        //    // {
+        //    //     Id = Paym.Id,
+                
+        //    //     PaymentName = Paym.PaymentName,
+        //    //     AppUserName = Paym.AppUser.UserName,
+        //    //     Discription = Paym.Discription,
+        //    //     PaymentValue = Paym.PaymentValue
+        //    // }).ToList();
+        //    //if (PaymentList.Any())
+        //    //    return new ApiResponse<List<PaymentResponse>>() { Data = PaymentList, Message = "This all Payments", Status = 200, isSuccess = true };
 
-            return new ApiResponse<List<PaymentResponse>>() { Data = new List<PaymentResponse>(), Message = "We Don't have Data", Status = 500, isSuccess = false };
+        //    //return new ApiResponse<List<PaymentResponse>>() { Data = new List<PaymentResponse>(), Message = "We Don't have Data", Status = 500, isSuccess = false };
 
-        }
+        //}
 
         public async Task<ApiResponse<PaymentResponse>> Update(PaymentRequest request)
         {
@@ -106,7 +106,7 @@ namespace Infrastructure.Repo
                 payment.PaymentName = request.PaymentName;
                 _context.SaveChangesAsync();
                 return new ApiResponse<PaymentResponse>() { Data = new PaymentResponse {Id=payment.Id,
-                    AppUserId=payment.AppUserId,AppUserName=payment.PaymentName,Discription=payment.Discription,
+                   Discription=payment.Discription,
                     PaymentName=payment.PaymentName,PaymentValue=payment.PaymentValue },isSuccess=true,Status=200,Message="Your Payment Updated" };
             }
 

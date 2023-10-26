@@ -20,7 +20,9 @@ namespace Core.Entities
 
         public AppUser AppUser { get; set; }
 
+        public int NumberOfProudects { get; set; }
         public  decimal TotalPrice { get; set; }
+        public decimal FullJaidenMoney { get; set; }
         public int status { get; set; }
 
         public ICollection<ProudectOrder> ProudectOrders { get; set; }

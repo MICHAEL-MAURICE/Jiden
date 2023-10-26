@@ -34,11 +34,7 @@ namespace Api.Controllers
             return Ok(await _payment.GetAll());
         }
 
-        [HttpGet("GetByUserId")]
-        public async Task<ActionResult< ApiResponse<List<PaymentResponse>>>> GetByUserId()
-        {
-            return Ok(_payment.GetByUserId());
-        }
+        
         [HttpPatch("Update")]
         public async Task<ActionResult< ApiResponse<PaymentResponse>>> Update(PaymentRequest request)
         {

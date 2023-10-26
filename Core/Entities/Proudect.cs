@@ -50,10 +50,12 @@ namespace Core.Entities
         //  public Guid? ProudectImage { get; set; }
         public Guid PharmaceuticalFormId { get; set; }
         public Guid DiscriminationId { get; set; }
+        [ForeignKey("AppUser")]
         public string AppUserId { get; set; }
 
         public Guid WayMedicineUsedId { get; set; }
         public Guid TypeOfMedicationId { get; set; }
+        [ForeignKey("PricingSettings")]
         public Guid? PricingSettingsId { get; set; }
 
         public ICollection<Image> Images { get; set; }

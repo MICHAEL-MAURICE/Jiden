@@ -13,7 +13,7 @@ namespace Core.Dto.Response
         public string PaymentName { get; set; }
         public string Discription { get; set; }
         public string PaymentValue { get; set; }
-        public string AppUserId { get; set; }
-        public string AppUserName { get; set; }
+  
+        
     }
 }

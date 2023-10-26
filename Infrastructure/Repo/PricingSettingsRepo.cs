@@ -90,7 +90,7 @@ namespace Infrastructure.Repo
             {
                 PricingSetting.ProudectPrice = request.ProudectPrice;
                 PricingSetting.Type = request.Type; 
-                PricingSetting.ProudectPrice=request.ProudectPrice;
+                PricingSetting.AdPricePerDay=request.AdPricePerDay;
                 _Context.SaveChanges();
                 return new ApiResponse() { isSuccess=true, Status = 200, 
                 Message="Updated Successfuly"};

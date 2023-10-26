@@ -14,7 +14,7 @@ namespace Core.Interfaces
     {
         public Task<ApiResponse> Create(PaymentRequest payment);
         public Task<ApiResponse<List<PaymentResponse>>> GetAll();
-        public Task<ApiResponse<List<PaymentResponse>>> GetByUserId();
+        //public Task<ApiResponse<List<PaymentResponse>>> GetByUserId();
         public Task<ApiResponse> Delete(Guid Id);
         public Task<ApiResponse<PaymentResponse>> Update(PaymentRequest payment);
 
