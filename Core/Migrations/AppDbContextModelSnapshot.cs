@@ -157,6 +157,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("NewsId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -172,6 +175,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ADID");
 
                     b.HasIndex("NewsId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("Proudectid");
 
@@ -229,6 +234,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("PaymentId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ReceiptImage")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -242,6 +250,10 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PaymentId");
+
+                    b.HasIndex("ReceiptImage")
+                        .IsUnique()
+                        .HasFilter("[ReceiptImage] IS NOT NULL");
 
                     b.HasIndex("UserId");
 
@@ -434,6 +446,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ProudectNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("sellerUser")
@@ -775,6 +790,10 @@ namespace Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("NewsId");
 
+                    b.HasOne("Core.Entities.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("Core.Entities.Proudect", "Proudect")
                         .WithMany("Images")
                         .HasForeignKey("Proudectid")
@@ -783,6 +802,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("Ad");
 
                     b.Navigation("News");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Proudect");
                 });
@@ -814,6 +835,10 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.Image", "Image")
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.Order", "ReceiptImage");
+
                     b.HasOne("Core.Identity.AppUser", "AppUser")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
@@ -821,6 +846,8 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+
+                    b.Navigation("Image");
 
                     b.Navigation("PaymentMethod");
                 });

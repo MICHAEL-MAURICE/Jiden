@@ -28,7 +28,8 @@ namespace Core.ImagesHandler
             Proudect  = 2 ,
             Ad = 3,
             ProudectLicence=4,
-            news=5
+            news=5,
+            ReceiptOrder=6
 
 
         }

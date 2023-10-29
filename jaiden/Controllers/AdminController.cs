@@ -17,14 +17,16 @@ namespace Api.Controllers
         private readonly IUser _Users;
         private readonly INews _News;
         private readonly IAd _ad;
+        private readonly IOrder _Order;
 
-        public AdminController(IProudect proudect,ITokenDecoder tokenDecoder,IUser Users,INews news,IAd ad)
+        public AdminController(IProudect proudect,ITokenDecoder tokenDecoder,IUser Users,INews news,IAd ad, IOrder order)
         {
             _Proudect = proudect;   
             _jwtTokenData=tokenDecoder.GetTokenData();
             _Users = Users; 
             _News = news;
             _ad = ad;
+            _Order = order;
                 
         }
 
@@ -87,6 +89,45 @@ namespace Api.Controllers
 
             return Ok(await _News.Active(Id));
         }
+
+
+        [HttpGet("GetpaidOrdersForUser")]
+        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpaidOrdersForUser(string UserId)
+        {
+
+            return Ok(await _Order.GetpaidOrdersForUser(UserId));
+        }
+
+        [HttpGet("GetPendingOrdersForUser")]
+        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetPendingOrdersForUser(string UserId)
+        {
+
+            return Ok(await _Order.GetPendingOrdersForUser(UserId));
+        }
+
+        [HttpGet("GetRejectedOrdersForUser")]
+        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetRejectedOrdersForUser(string UserId)
+        {
+
+            return Ok(await _Order.GetRejectedOrdersForUser(UserId));
+        }
+        [HttpGet("GetpartialApprovalOrdersForUser")]
+        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpartialApprovalOrdersForUser(string UserId)
+        {
+
+            return Ok(await _Order.GetpartialApprovalOrdersForUser(UserId));
+        }
+
+
+        [HttpGet("GetneedToAttachImageOrdersForUser")]
+        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetneedToAttachImageOrdersForUser(string UserId)
+        {
+
+            return Ok(await _Order.GetneedToAttachImageOrdersForUser(UserId));
+        }
+
+
+
 
     }
 }

@@ -24,6 +24,7 @@ namespace Core.Entities
         public string sellerUser { get; set; }
 
         public AppUser AppUser { get; set; }
+        public int Status { get; set; }
 
         public decimal PricePerUnit { get; set; }
 

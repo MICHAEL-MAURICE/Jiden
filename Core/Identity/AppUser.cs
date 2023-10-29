@@ -35,9 +35,9 @@ namespace Core.Identity
         public ICollection<GeographicalDistributionRange> GeographicalDistributionRanges { get; set; }
         public ICollection<Proudect>? Proudects { get; set; }
         public ICollection<Ad> ?Ads { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order> ?Orders { get; set; }
         public ICollection<News> News { get; set; }
-        public ICollection<ProudectOrder> ProudectOrders { get; set; }
+        public ICollection<ProudectOrder>? ProudectOrders { get; set; }
 
 
 

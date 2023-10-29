@@ -18,12 +18,17 @@ namespace Core.Entities
         [ForeignKey("AppUser")]
         public string UserId { get; set; }
 
+        
         public AppUser AppUser { get; set; }
 
         public int NumberOfProudects { get; set; }
         public  decimal TotalPrice { get; set; }
         public decimal FullJaidenMoney { get; set; }
         public int status { get; set; }
+        [ForeignKey("Image")]
+        public Guid ?ReceiptImage { get; set; }
+
+        public Image? Image { get; set; }
 
         public ICollection<ProudectOrder> ProudectOrders { get; set; }
 

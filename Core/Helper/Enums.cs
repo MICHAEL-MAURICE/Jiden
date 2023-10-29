@@ -22,8 +22,21 @@ namespace Core.Helper
         }
         public enum OrderStatus
         {
-            RequestOrder = 0,
-            PayedOrdr = 1
+
+            pennding = 0,
+            rejected = 1,
+            paid = 2,
+            partialApproval=3,
+            needToAttachImage=4
+
+
+        }
+
+        public enum ProudectOrder
+        {
+            pennding=0,
+            rejected=1,
+            paid = 2
 
         }
     }

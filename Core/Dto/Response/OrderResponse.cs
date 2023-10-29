@@ -8,6 +8,7 @@ namespace Core.Dto.Response
 {
     public class OrderResponse
     {
+        public  Guid ?OrderId { get; set; }
         public Guid Id { get; set; }
         public string NameInEnglish { get; set; }
 

@@ -22,8 +22,10 @@ namespace Core.Entities
         public Guid? ADID { get; set; }
         [ForeignKey("News")]
         public Guid ? NewsId { get; set; }
+        [ForeignKey("Order")]
+        public Guid ? OrderId { get; set; }
+        public Order? Order { get; set; }
 
-        
         public News? News { get; set; }
         public AppUser ?AppUser { get; set; }
         [JsonIgnore]
