@@ -52,6 +52,12 @@ namespace Infrastructure.Repo
         {
             try
             {
+                var ProudectAd = _context.Ads.Where(ad => ad.ProudectId == request.ProudectId && ad.Active == true && ad.EndDate >= DateTime.UtcNow).FirstOrDefault();
+                if (ProudectAd != null)
+                {
+                    return new ApiResponse() { isSuccess = false, Status = 500, Message = "This Proudect has an Active Ad" };
+                }
+
                 var Proudect = _context.Proudects.FirstOrDefault(pr => pr.Id == request.ProudectId)?.Priority;
                 if (Proudect != null)
                 {
@@ -72,7 +78,7 @@ namespace Infrastructure.Repo
 
                 await _context.SaveChangesAsync();
 
-
+               
                 var Ad = new Ad()
                 {
                     Id = Guid.NewGuid(),

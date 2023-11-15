@@ -28,6 +28,16 @@ namespace Api.Controllers
         }
 
 
+
+        [HttpPost("PostOrderAgent")]
+
+        public async Task<ActionResult<ApiResponse<List<OrderResponse>>>> RequestOrderAgent(List<ProudectAgentRequest> request, Guid PaymentId)
+        {
+
+            return Ok(await _Order.RequestOrderAgent(request,PaymentId));
+        }
+
+
         [HttpPost("UploadReceiptImage")]
         public async Task<ActionResult<ApiResponse>> UploadReceiptImage(OrderReceiptRequest request)
         {
@@ -36,79 +46,108 @@ namespace Api.Controllers
         }
 
 
-        [HttpGet("GetpaidOrders")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpaidOrders()
-        {
-
-            return Ok(await _Order.GetpaidOrders());
-        }
-
-        [HttpGet("GetPendingOrders")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetPendingOrders()
-        {
-
-            return Ok(await _Order.GetPendingOrders());
-        }
-
-        [HttpGet("GetRejectedOrders")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetRejectedOrders()
-        {
-
-            return Ok(await _Order.GetRejectedOrders());
-        }
-        [HttpGet("GetpartialApprovalOrders")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpartialApprovalOrders()
-        {
-
-            return Ok(await _Order.GetpartialApprovalOrders());
-        }
-
-
-        [HttpGet("GetneedToAttachImageOrders")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetneedToAttachImageOrders()
-        {
-
-            return Ok(await _Order.GetneedToAttachImageOrders());
-        }
-
-        [HttpGet("GetpaidOrdersForUser")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpaidOrdersForUser()
-        {
-
-            return Ok(await _Order.GetpaidOrdersForUser());
-        }
-
-        [HttpGet("GetPendingOrdersForUser")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetPendingOrdersForUser()
-        {
-
-            return Ok(await _Order.GetPendingOrdersForUser());
-        }
-
-        [HttpGet("GetRejectedOrdersForUser")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetRejectedOrdersForUser()
-        {
-
-            return Ok(await _Order.GetRejectedOrdersForUser());
-        }
-        [HttpGet("GetpartialApprovalOrdersForUser")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpartialApprovalOrdersForUser()
-        {
-
-            return Ok(await _Order.GetpartialApprovalOrdersForUser());
-        }
-
-
-        [HttpGet("GetneedToAttachImageOrdersForUser")]
-        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetneedToAttachImageOrdersForUser()
-        {
-
-            return Ok(await _Order.GetneedToAttachImageOrdersForUser());
-        }
-
-
-
        
+
+
+
+        [HttpGet("GetOrdersForUser")]
+        public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetOrdersForUser(int Status)
+        {
+
+            return Ok(await _Order.GetOrdersForUser(Status));
+        }
+
+        //[HttpGet("GetPendingOrdersForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetPendingOrdersForUser()
+        //{
+
+        //    return Ok(await _Order.GetPendingOrdersForUser());
+        //}
+
+        //[HttpGet("GetRejectedOrdersForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetRejectedOrdersForUser()
+        //{
+
+        //    return Ok(await _Order.GetRejectedOrdersForUser());
+        //}
+        //[HttpGet("GetpartialApprovalOrdersForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpartialApprovalOrdersForUser()
+        //{
+
+        //    return Ok(await _Order.GetpartialApprovalOrdersForUser());
+        //}
+
+
+        //[HttpGet("GetneedToAttachImageOrdersForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetneedToAttachImageOrdersForUser()
+        //{
+
+        //    return Ok(await _Order.GetneedToAttachImageOrdersForUser());
+        //}
+
+
+
+        //[HttpGet("GetpaidOrdersAgentForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpaidOrdersAgentForUser()
+        //{
+
+        //    return Ok(await _Order.GetpaidOrdersAgentForUser());
+        //}
+
+        //[HttpGet("GetPendingOrdersAgentForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetPendingOrdersAgentForUser()
+        //{
+
+        //    return Ok(await _Order.GetPendingOrdersAgentForUser());
+        //}
+
+        //[HttpGet("GetRejectedOrdersAgentForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetRejectedOrdersAgentForUser()
+        //{
+
+        //    return Ok(await _Order.GetRejectedOrdersAgentForUser());
+        //}
+        //[HttpGet("GetpartialApprovalOrdersAgentForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetpartialApprovalOrdersAgentForUser()
+        //{
+
+        //    return Ok(await _Order.GetpartialApprovalOrdersAgentForUser());
+        //}
+
+
+        //[HttpGet("GetneedToAttachImageOrdersAgentForUser")]
+        //public async Task<ActionResult<ApiResponse<List<GetAllOrderResponse>>>> GetneedToAttachImageOrdersAgentForUser()
+        //{
+
+        //    return Ok(await _Order.GetneedToAttachImageOrdersAgentForUser());
+        //}
+
+
+        [HttpGet("GetOrderDetailes")]
+        public async Task<ActionResult<ApiResponse<OrderDetailesResponse>>> GetOrderDetailes(Guid Id)
+        {
+
+            return Ok(await _Order.GetOrderDetailes(Id));
+        }
+        [HttpGet("GetOrderProudectDetailes")]
+        public async Task<ActionResult<ApiResponse<ProudectOrderResponse>>> GetOrderProudectDetailes(Guid Id)
+        {
+
+            return Ok(await _Order.GetOrderProudectDetailes(Id));
+        }
+
+        [HttpGet("GetOrderAgentDetailes")]
+        public async Task<ActionResult<ApiResponse<OrderDetailesResponse>>> GetOrderAgentDetailes(Guid Id)
+        {
+
+            return Ok(await _Order.GetOrderAgentDetailes(Id));
+        }
+        [HttpGet("GetOrderProudectAgentDetailes")]
+        public async Task<ActionResult<ApiResponse<ProudectOrderResponse>>> GetOrderProudectAgentDetailes(Guid Id)
+        {
+
+            return Ok(await _Order.GetOrderProudectAgentDetailes(Id));
+        }
 
     }
 }

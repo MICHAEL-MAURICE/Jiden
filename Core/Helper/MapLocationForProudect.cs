@@ -8,6 +8,7 @@ namespace Core.Helper
 {
     public class MapLocationForProudect
     {
+        public Guid? GovernorateId { get; set; }
         public string GovernorateNameInEnglish { get; set; }
         public string GovernorateNameInArabic { get; set; }
         public string City { get; set; }

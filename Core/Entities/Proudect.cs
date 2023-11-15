@@ -61,9 +61,8 @@ namespace Core.Entities
         public ICollection<Image> Images { get; set; }
   
         public ICollection<GeographicalDistributionRange> GeographicalDistributionRanges { get; set; }
+        public ICollection<ProudectAgent> ProudectAgents { get; set; }
 
-
-     
         public PharmaceuticalForm PharmaceuticalForm { get; set; }
        
 

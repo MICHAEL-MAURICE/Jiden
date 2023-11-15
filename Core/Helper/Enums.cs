@@ -22,22 +22,26 @@ namespace Core.Helper
         }
         public enum OrderStatus
         {
-
             pennding = 0,
             rejected = 1,
             paid = 2,
             partialApproval=3,
-            needToAttachImage=4
-
-
+            needToAttachImage=4,
+            penndingAgent = 5,
+            rejectedAgent = 6,
+            PaidAgent = 7,
+            partialApprovalAgent = 8,
+            needToAttachImageAgent=9
         }
 
         public enum ProudectOrder
         {
             pennding=0,
             rejected=1,
-            paid = 2
-
+            paid = 2,
+            penndingAgent =3,
+            rejectedAgent = 4,
+            AcceptAgent = 2
         }
     }
 }

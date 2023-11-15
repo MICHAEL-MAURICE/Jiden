@@ -100,7 +100,7 @@ builder.Services.AddScoped(typeof(IGeneric<>), typeof(Generic<>));
 builder.Services.AddScoped<IUser, User>();
 builder.Services.AddScoped<IPricingSettings,PricingSettingsRepo>();
 builder.Services.AddScoped<INews, NewsRepo>();
-
+builder.Services.AddScoped<IGeographicalRenge, GeographicalRengeRepo>();
 
 
 //______________Identity____________________________________

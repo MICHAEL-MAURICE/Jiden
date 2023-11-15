@@ -12,11 +12,11 @@ namespace Core.Dto.Request
         public Guid Id { get; set; }
         public int OrderStatus { get; set; }
      
-        public List<ProudectOrder> ProudectOrderList { get; set; }
+        public List<ProudectOrderItem> ProudectOrderList { get; set; }
 
     }
 
-    public class ProudectOrder
+    public class ProudectOrderItem
     {
         public Guid Id { get; set; }
         public int ProudectOrderStatus { get; set; }

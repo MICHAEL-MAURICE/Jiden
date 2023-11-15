@@ -104,6 +104,10 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("GovernorateId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ProudectAgentId")
+                        .IsRequired()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("ProudectId")
                         .HasColumnType("uniqueidentifier");
 
@@ -118,6 +122,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("GovernorateId")
                         .IsUnique()
                         .HasFilter("[GovernorateId] IS NOT NULL");
+
+                    b.HasIndex("ProudectAgentId");
 
                     b.HasIndex("ProudectId");
 
@@ -425,6 +431,45 @@ namespace Infrastructure.Migrations
                     b.HasIndex("WayMedicineUsedId");
 
                     b.ToTable("Proudects");
+                });
+
+            modelBuilder.Entity("Core.Entities.ProudectAgent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("JaidenMoney")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("PricePerUnit")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("ProudectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ProudectNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("sellerUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProudectId");
+
+                    b.HasIndex("sellerUser");
+
+                    b.ToTable("ProudectAgents");
                 });
 
             modelBuilder.Entity("Core.Entities.ProudectOrder", b =>
@@ -769,6 +814,12 @@ namespace Infrastructure.Migrations
                         .WithOne("GeographicalDistributionRange")
                         .HasForeignKey("Core.Entities.GeographicalDistributionRange", "GovernorateId");
 
+                    b.HasOne("Core.Entities.ProudectAgent", "ProudectAgent")
+                        .WithMany("GeographicalDistributionRangeForAgent")
+                        .HasForeignKey("ProudectAgentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Proudect", "Proudect")
                         .WithMany("GeographicalDistributionRanges")
                         .HasForeignKey("ProudectId");
@@ -778,6 +829,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("Governorate");
 
                     b.Navigation("Proudect");
+
+                    b.Navigation("ProudectAgent");
                 });
 
             modelBuilder.Entity("Core.Entities.Image", b =>
@@ -901,6 +954,33 @@ namespace Infrastructure.Migrations
                     b.Navigation("WayMedicineUsed");
                 });
 
+            modelBuilder.Entity("Core.Entities.ProudectAgent", b =>
+                {
+                    b.HasOne("Core.Entities.Order", "Order")
+                        .WithMany("proudectAgents")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Proudect", "Proudect")
+                        .WithMany("ProudectAgents")
+                        .HasForeignKey("ProudectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Identity.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("sellerUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Proudect");
+                });
+
             modelBuilder.Entity("Core.Entities.ProudectOrder", b =>
                 {
                     b.HasOne("Core.Entities.Order", "Order")
@@ -1003,6 +1083,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.Order", b =>
                 {
                     b.Navigation("ProudectOrders");
+
+                    b.Navigation("proudectAgents");
                 });
 
             modelBuilder.Entity("Core.Entities.PharmaceuticalForm", b =>
@@ -1019,7 +1101,14 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Images");
 
+                    b.Navigation("ProudectAgents");
+
                     b.Navigation("ProudectOrders");
+                });
+
+            modelBuilder.Entity("Core.Entities.ProudectAgent", b =>
+                {
+                    b.Navigation("GeographicalDistributionRangeForAgent");
                 });
 
             modelBuilder.Entity("Core.Entities.WayMedicineUsed", b =>

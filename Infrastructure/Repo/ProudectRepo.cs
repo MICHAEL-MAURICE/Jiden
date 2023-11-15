@@ -167,52 +167,69 @@ namespace Infrastructure.Repo
             }
         }
 
-        public async Task<ApiResponse<List<AllProudectsResponse>>> GetAllActiveProudects()
+        public async Task<ApiResponse<List<AllProudectsResponse>>> GetAllActiveProudects(int PageNumber=1, int Count=10)
         {
-            var Proudects = await _Context.Proudects
+            if (PageNumber > 0 && Count > 0)
+            {
+                int AlreadyseenCount = (PageNumber - 1) * Count;
+                var Proudects = await _Context.Proudects
     .Include(pr => pr.AppUser)
-    
+
     .Include(pr => pr.Images)
-    
+
     .Where(pr => pr.ActiveProudect == true)
-    .OrderBy(pr => pr.Priority) 
+     .Skip(AlreadyseenCount)
+                    .Take(Count)
+    .OrderByDescending(pr => pr.Priority )
     .ToListAsync();
 
-            if (Proudects.Any())
-            {
-
-                List<AllProudectsResponse> ProudectsRes = new List<AllProudectsResponse>();
-                foreach(var Proudect in Proudects)
+                if (Proudects.Any())
                 {
-                    ProudectsRes.Add(new AllProudectsResponse()
+
+                    List<AllProudectsResponse> ProudectsRes = new List<AllProudectsResponse>();
+                    foreach (var Proudect in Proudects)
                     {
-                        Id= Proudect.Id,
-                        NameInArabic=Proudect.NameInArabic,
-                        NameInEnglish=Proudect.NameInEnglish,
-                        ActiveSubstances=Proudect.ActiveSubstances,
-                        AppUser=Proudect.AppUser,
-                        CompanyNameInEnglish=Proudect.CompanyNameInEnglish,
-                        Discount=Proudect.Discount,
-                        Discription=Proudect.Discription,
-                        FactoryNameInEnglish=Proudect.FactoryNameInEnglish,
-                        Price=Proudect.Price,
-                        AgentRequest = Proudect.AgentRequest,
-                        ProudectImage =ImagesUtilities.GetImage(Proudect.Images.FirstOrDefault(img=>img.Type==(int)ImageTypes.Proudect).Path),
-                        
-                    });
+                        ProudectsRes.Add(new AllProudectsResponse()
+                        {
+                            Id = Proudect.Id,
+                            NameInArabic = Proudect.NameInArabic,
+                            NameInEnglish = Proudect.NameInEnglish,
+                            ActiveSubstances = Proudect.ActiveSubstances,
+                            AppUser = Proudect.AppUser,
+                            CompanyNameInEnglish = Proudect.CompanyNameInEnglish,
+                            Discount = Proudect.Discount,
+                            Discription = Proudect.Discription,
+                            FactoryNameInEnglish = Proudect.FactoryNameInEnglish,
+                            Price = Proudect.Price,
+                            AgentRequest = Proudect.AgentRequest,
+                            ProudectImage = ImagesUtilities.GetImage(Proudect.Images.FirstOrDefault(img => img.Type == (int)ImageTypes.Proudect).Path),
+
+                        });
+                    }
+
+
+
+
+                    return new ApiResponse<List<AllProudectsResponse>>()
+                    {
+                        Message = "There are our Proudects",
+                        Data = ProudectsRes,
+                        Status = 200,
+                        isSuccess = true
+
+                    };
+
                 }
+                return new ApiResponse<List<AllProudectsResponse>>()
+                {
+                    Message = "We don't have any Proudects",
+                    Data = null,
+                    Status = 200,
+                    isSuccess = false
 
-
-
-
-                return new ApiResponse<List<AllProudectsResponse>>() {
-           Message="There are our Proudects",
-           Data= ProudectsRes,
-           Status=200,
-           isSuccess=true
-
-            };
+                };
             }
+
             return new ApiResponse<List<AllProudectsResponse>>()
             {
                 Message = "We don't have any Proudects",
@@ -223,14 +240,14 @@ namespace Infrastructure.Repo
             };
 
 
-
-
-
         }
 
-        public async Task<ApiResponse<List<AllProudectsResponse>>> GetAllNonActiveProudects()
+        public async Task<ApiResponse<List<AllProudectsResponse>>> GetAllNonActiveProudects(int PageNumber = 1, int Count = 10)
         {
-            var Proudects = await _Context.Proudects
+            if (PageNumber > 0 && Count > 0)
+            {
+                int AlreadyseenCount = (PageNumber - 1) * Count;
+                var Proudects = await _Context.Proudects
    .Include(pr => pr.AppUser)
    .Include(pr => pr.Discrimination)
    .Include(pr => pr.PharmaceuticalForm)
@@ -240,42 +257,52 @@ namespace Infrastructure.Repo
    .Include(pr => pr.TypeOfMedication)
    .Include(pr => pr.WayMedicineUsed)
    .Where(pr => pr.ActiveProudect == false)
-   .OrderBy(pr => pr.Priority)
+    .Skip(AlreadyseenCount)
+                    .Take(Count)
+   .OrderByDescending(pr => pr.Priority)
    .ToListAsync();
 
-            if (Proudects.Any())
-            {
-
-                List<AllProudectsResponse> ProudectsRes = new List<AllProudectsResponse>();
-                foreach (var Proudect in Proudects)
+                if (Proudects.Any())
                 {
-                    ProudectsRes.Add(new AllProudectsResponse()
+
+                    List<AllProudectsResponse> ProudectsRes = new List<AllProudectsResponse>();
+                    foreach (var Proudect in Proudects)
                     {
-                         Id= Proudect.Id,
-                        NameInArabic = Proudect.NameInArabic,
-                        NameInEnglish = Proudect.NameInEnglish,
-                        Discount=Proudect.Discount,
-                        ActiveSubstances = Proudect.ActiveSubstances,
-                        AppUser = Proudect.AppUser,
-                        CompanyNameInEnglish = Proudect.CompanyNameInEnglish,
-                        Discription = Proudect.Discription,
-                        FactoryNameInEnglish = Proudect.FactoryNameInEnglish,
-                        Price = Proudect.Price,
-                        AgentRequest=Proudect.AgentRequest,
-                        ProudectImage = ImagesUtilities.GetImage(Proudect.Images.FirstOrDefault(img => img.Type == (int)ImageTypes.Proudect).Path),
-                       
-                    });
+                        ProudectsRes.Add(new AllProudectsResponse()
+                        {
+                            Id = Proudect.Id,
+                            NameInArabic = Proudect.NameInArabic,
+                            NameInEnglish = Proudect.NameInEnglish,
+                            Discount = Proudect.Discount,
+                            ActiveSubstances = Proudect.ActiveSubstances,
+                            AppUser = Proudect.AppUser,
+                            CompanyNameInEnglish = Proudect.CompanyNameInEnglish,
+                            Discription = Proudect.Discription,
+                            FactoryNameInEnglish = Proudect.FactoryNameInEnglish,
+                            Price = Proudect.Price,
+                            AgentRequest = Proudect.AgentRequest,
+                            ProudectImage = ImagesUtilities.GetImage(Proudect.Images.FirstOrDefault(img => img.Type == (int)ImageTypes.Proudect).Path),
+
+                        });
+                    }
+
+
+
+
+                    return new ApiResponse<List<AllProudectsResponse>>()
+                    {
+                        Message = "There are our Proudects",
+                        Data = ProudectsRes,
+                        Status = 200,
+                        isSuccess = true
+                    };
                 }
-
-
-
-
                 return new ApiResponse<List<AllProudectsResponse>>()
                 {
-                    Message = "There are our Proudects",
-                    Data = ProudectsRes,
+                    Message = "We don't have any Proudects",
+                    Data = new List<AllProudectsResponse>(),
                     Status = 200,
-                    isSuccess = true
+                    isSuccess = false
                 };
             }
             return new ApiResponse<List<AllProudectsResponse>>()
@@ -286,7 +313,6 @@ namespace Infrastructure.Repo
                 isSuccess = false
             };
 
-         
         }
 
    
@@ -334,12 +360,14 @@ namespace Infrastructure.Repo
                         DiscriminationName=Proudect.Discrimination.Name,
                         Discription = Proudect.Discription,
                         FactoryNameInEnglish = Proudect.FactoryNameInEnglish,
-                        GeographicalDistributionRanges = Proudect.GeographicalDistributionRanges.Select(item=>new MapLocationForProudect()
+                        GeographicalDistributionRanges = Proudect.GeographicalDistributionRanges.Select(item=>
+                        new MapLocationForProudect()
                         {
-                           GovernorateNameInEnglish=item.Governorate.NameInEnglish??"",
-                           GovernorateNameInArabic=item.Governorate.NameInArabic??"",
-                            City=item.City,
-                            station=item.station
+                            GovernorateId=item.GovernorateId!=null? item.GovernorateId:Guid.Empty,
+                           GovernorateNameInEnglish=item.Governorate?.NameInEnglish!=null? item.Governorate.NameInEnglish:" ",
+                           GovernorateNameInArabic=item.Governorate?.NameInArabic!=null? item.Governorate.NameInArabic:" ",
+                            City=item.City!=null? item.City:" ",
+                            station=item.station!=null? item.station:" "
 
                         }).ToList(),
                         InternationalBarcode = Proudect.InternationalBarcode,
@@ -375,40 +403,45 @@ namespace Infrastructure.Repo
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResponse<List<AllProudectsResponse>>> GetProudectsByLocation()
+        public async Task<ApiResponse<List<AllProudectsResponse>>> GetProudectsByLocation(int PageNumber = 1, int Count = 10)
         {
-           
-                var UserLocations =_jwtTokenData.Governorates;
 
-
-            if (!UserLocations.Any() || UserLocations==null)
+            if (PageNumber > 0 && Count > 0)
             {
-                return new ApiResponse<List<AllProudectsResponse>>()
+                int AlreadyseenCount = (PageNumber - 1) * Count;
+                var UserLocations = _jwtTokenData.Governorates;
+
+
+                if (!UserLocations.Any() || UserLocations == null)
                 {
-                    Message = "We don't have any Proudects",
-                    Data = new List<AllProudectsResponse>() { },
-                    Status = 200,
-                    isSuccess = false
-                };
+                    return new ApiResponse<List<AllProudectsResponse>>()
+                    {
+                        Message = "We don't have any Proudects",
+                        Data = new List<AllProudectsResponse>() { },
+                        Status = 200,
+                        isSuccess = false
+                    };
 
-            }
-            //  var CrossLocattion = await _Context.Proudects.Include(x => x.GeographicalDistributionRanges).Where(govId => govId.GeographicalDistributionRanges.Select(geo => geo.GovernorateId).Except(Userlocations).Any()).ToListAsync();
-            //.Include(x => x.GeographicalDistributionRanges).Select(govId => govId.GeographicalDistributionRanges.Select(geo => geo.GovernorateId).Except(Userlocations))
-            var CrossLocationProducts = await _Context.Proudects
-        .Include(pr => pr.AppUser)
-        .Include(pr => pr.Images)
-        .Include(pr => pr.PharmaceuticalForm)
-        .Include(pr => pr.TypeOfMedication)
-        .Include(pr => pr.WayMedicineUsed)
-        .Include(pr => pr.GeographicalDistributionRanges)
-        .Where(pr => pr.GeographicalDistributionRanges
-           .Any(geo => UserLocations.Contains(geo.GovernorateId)))
-        .Where(pr => pr.ActiveProudect)
-        .OrderBy(pr => pr.Priority)
-        .ToListAsync();
+                }
+                //  var CrossLocattion = await _Context.Proudects.Include(x => x.GeographicalDistributionRanges).Where(govId => govId.GeographicalDistributionRanges.Select(geo => geo.GovernorateId).Except(Userlocations).Any()).ToListAsync();
+                //.Include(x => x.GeographicalDistributionRanges).Select(govId => govId.GeographicalDistributionRanges.Select(geo => geo.GovernorateId).Except(Userlocations))
+                var CrossLocationProducts = await _Context.Proudects
+            .Include(pr => pr.AppUser)
+            .Include(pr => pr.Images)
+            .Include(pr => pr.PharmaceuticalForm)
+            .Include(pr => pr.TypeOfMedication)
+            .Include(pr => pr.WayMedicineUsed)
+            .Include(pr => pr.GeographicalDistributionRanges)
+            .Where(pr => pr.GeographicalDistributionRanges
+               .Any(geo => UserLocations.Contains(geo.GovernorateId)))
+            .Where(pr => pr.ActiveProudect)
+             .Skip(AlreadyseenCount)
+                    .Take(Count)
+            .OrderByDescending(pr => pr.Priority)
+            .ToListAsync();
 
 
-            if (CrossLocationProducts.Any())
+                if (CrossLocationProducts.Any())
                 {
 
                     List<AllProudectsResponse> ProudectsRes = new List<AllProudectsResponse>();
@@ -445,8 +478,8 @@ namespace Infrastructure.Repo
 
                 }
 
-                
-           
+
+
                 return new ApiResponse<List<AllProudectsResponse>>()
                 {
                     Message = "We don't have any Proudects",
@@ -454,7 +487,15 @@ namespace Infrastructure.Repo
                     Status = 200,
                     isSuccess = false
                 };
-            
+            }
+            return new ApiResponse<List<AllProudectsResponse>>()
+            {
+                Message = "We don't have any Proudects",
+                Data = new List<AllProudectsResponse>() { },
+                Status = 200,
+                isSuccess = false
+            };
+
         }
 
         public async Task<ApiResponse> UnActiveProudectByID(Guid ProudectId)
@@ -492,7 +533,7 @@ namespace Infrastructure.Repo
     .Include(pr => pr.Images)
 
     .Where(pr => pr.ActiveProudect == true && pr.NameInEnglish.StartsWith(ProudectEnglishName))
-    .OrderBy(pr => pr.Priority)
+    .OrderByDescending(pr => pr.Priority)
     .ToListAsync();
 
             if (Proudects.Any())
@@ -552,7 +593,7 @@ namespace Infrastructure.Repo
     .Include(pr => pr.Images)
 
     .Where(pr => pr.ActiveProudect == true && pr.NameInArabic.StartsWith(ProudectArabicName))
-    .OrderBy(pr => pr.Priority)
+    .OrderByDescending(pr => pr.Priority)
     .ToListAsync();
 
             if (Proudects.Any())
@@ -736,7 +777,7 @@ namespace Infrastructure.Repo
  .Include(pr => pr.Images)
 
  .Where(pr => pr.ActiveProudect == true && pr.ActiveSubstances.Contains(ActiveSubstance))
- .OrderBy(pr => pr.Priority)
+ .OrderByDescending(pr => pr.Priority)
  .ToListAsync();
 
             if (Proudects.Any())

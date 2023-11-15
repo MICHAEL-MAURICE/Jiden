@@ -22,7 +22,7 @@ namespace Core.Dto.Response
         public int NumberOfProudects { get; set; }
         public decimal TotalPrice { get; set; }
         public decimal FullJaidenMoney { get; set; }
-        public string status { get; set; }
+        public int status { get; set; }
        
         public string ReceiptImage { get; set; }
 

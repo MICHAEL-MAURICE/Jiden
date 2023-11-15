@@ -25,7 +25,7 @@ namespace Core.Dto.Response
         public string sellerUser { get; set; }
 
        
-        public string Status { get; set; }
+        public int Status { get; set; }
 
         public decimal PricePerUnit { get; set; }
 

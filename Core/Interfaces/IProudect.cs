@@ -13,13 +13,13 @@ namespace Core.Interfaces
     public interface IProudect
     {
         public Task<ApiResponse> CreateProudect(ProudectRequest proudect);
-        public  Task<ApiResponse<List<AllProudectsResponse>>> GetAllActiveProudects();
+        public  Task<ApiResponse<List<AllProudectsResponse>>> GetAllActiveProudects(int PageNumber, int Count);
         public Task<ApiResponse<ProudectResponse>> GetProudectByID(Guid ProudectId);
         public Task<ApiResponse<ProudectResponse>> UpdateProudect(Guid ProudectId, ProudectRequestUpdate proudect);
-        public Task<ApiResponse<List<AllProudectsResponse>>> GetProudectsByLocation();
+        public Task<ApiResponse<List<AllProudectsResponse>>> GetProudectsByLocation(int PageNumber, int Count);
         public Task<ApiResponse> ActiveProudectByID(Guid ProudectId);
         public Task<ApiResponse> UnActiveProudectByID(Guid ProudectId);
-        public  Task<ApiResponse<List<AllProudectsResponse>>> GetAllNonActiveProudects();
+        public  Task<ApiResponse<List<AllProudectsResponse>>> GetAllNonActiveProudects(int PageNumber, int Count);
 
         public Task<ApiResponse> DeleteProudectByID(Guid ProudectId);
         public  Task<ApiResponse<List<AllProudectsResponse>>> GetProudectsByEnglishName(string ProudectEnglishName);

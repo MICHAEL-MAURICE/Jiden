@@ -25,9 +25,9 @@ namespace Api.Controllers
             return Ok(await _Proudect.CreateProudect(request));
         }
         [HttpGet("GetAllActiveProudects")]
-        public async Task<ActionResult<ApiResponse<List<AllProudectsResponse>>>> GetAllActiveProudects()
+        public async Task<ActionResult<ApiResponse<List<AllProudectsResponse>>>> GetAllActiveProudects(int PageNumber, int Count)
         {
-            return Ok(await _Proudect.GetAllActiveProudects());
+            return Ok(await _Proudect.GetAllActiveProudects(PageNumber,Count));
         }
         [HttpGet("GetProudectByID")]
         public async Task<ActionResult<ApiResponse<ProudectResponse>>> GetProudectByID(Guid ProudectId)
@@ -36,15 +36,15 @@ namespace Api.Controllers
         }
         
         [HttpGet("GetAllNonActiveProudects")]
-        public async Task<ActionResult<ApiResponse<List<AllProudectsResponse>>>> GetAllNonActiveProudects()
+        public async Task<ActionResult<ApiResponse<List<AllProudectsResponse>>>> GetAllNonActiveProudects(int PageNumber, int Count)
         {
-            return Ok(await _Proudect.GetAllNonActiveProudects());
+            return Ok(await _Proudect.GetAllNonActiveProudects(PageNumber,Count));
         }
 
         [HttpGet("GetProudectsByLocation")]
-        public async Task<ActionResult<ApiResponse<List<AllProudectsResponse>>>> GetProudectsByLocation()
+        public async Task<ActionResult<ApiResponse<List<AllProudectsResponse>>>> GetProudectsByLocation(int PageNumber, int Count)
         {
-            return Ok(await _Proudect.GetProudectsByLocation());
+            return Ok(await _Proudect.GetProudectsByLocation(PageNumber,Count));
         }
 
         [HttpPatch("UpdateProudectById")]

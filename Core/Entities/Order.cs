@@ -30,7 +30,8 @@ namespace Core.Entities
 
         public Image? Image { get; set; }
 
-        public ICollection<ProudectOrder> ProudectOrders { get; set; }
+        public ICollection<ProudectOrder>? ProudectOrders { get; set; }
+        public ICollection<ProudectAgent>? proudectAgents { get; set; }
 
     }
 }

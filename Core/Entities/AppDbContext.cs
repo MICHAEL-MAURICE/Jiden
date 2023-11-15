@@ -51,6 +51,7 @@ namespace Core.Entities
         public DbSet<PricingSettings> PricingSettings { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProudectOrder> ProudectOrders { get; set; }
+        public DbSet<ProudectAgent> ProudectAgents { get; set; }
 
 
 
